@@ -47,6 +47,7 @@ function callLoginApi(email, password, callback) {
     } else {
       return callback(new Error('Invalid email and password'));
     }
+
   }, 1000);
 }
 
