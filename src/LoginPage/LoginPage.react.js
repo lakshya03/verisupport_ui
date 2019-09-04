@@ -1,4 +1,8 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+import Navigation from '../Navigation/Navigation.react'
+import { Redirect } from 'react-router';
+
 import {
     Button,
     Form,
@@ -9,12 +13,23 @@ import {
   } from 'semantic-ui-react';
   import { connect } from 'react-redux';
   import { login } from '../loginreducer';
+import Register from '../Register/Register.react';
 
 class LoginPage extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {};
+        this.state = {
+          showComponent: false,
+        };
         this.onSubmit = this.onSubmit.bind(this);
+        this._onButtonClick = this._onButtonClick.bind(this);
+        
+    }
+
+    _onButtonClick() {
+      this.setState({
+        showComponent: true,
+      });
     }
 
     render() {
@@ -49,9 +64,17 @@ class LoginPage extends React.Component {
           </Button>
         </Form>
       </Segment>
-      <Message>
-        Not registered yet? <a href="#">Sign Up</a>
+    <Message> 
+      {/* <Button onClick={this._onButtonClick}>Sign Up</Button>
+        {this.state.showComponent ?
+           <Register /> :
+           null
+        }  */}
+        Not registered yet?  <Link to="/register">Sign Up</Link>
+        {/* Not registered yet?  <Navigation></Navigation><Redirect to='/register'> Sign Up </Redirect> */}
       </Message>
+
+     
     </Grid.Column>
   </Grid>
   <div className="message">
