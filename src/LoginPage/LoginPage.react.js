@@ -60,7 +60,7 @@ class LoginPage extends React.Component {
             onChange={e => this.setState({password: e.target.value})} value={password}
           />
            <Button color="blue" fluid size="large">
-            Login
+            Login 
           </Button>
         </Form>
       </Segment>
@@ -79,7 +79,7 @@ class LoginPage extends React.Component {
   </Grid>
   <div className="message">
           { isLoginPending && <div>Please wait...</div> }
-          { isLoginSuccess && <div>Success.</div> }
+          {isLoginSuccess && <div>Success.</div> && <Link to="/register">Success</Link>}
           { loginError && <div>{loginError.message}</div> }
         </div>
             </div>
@@ -94,6 +94,7 @@ onSubmit(e) {
       email: '',
       password: ''
     });
+    
   }
 }
 
