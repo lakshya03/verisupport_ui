@@ -1,4 +1,5 @@
 import React from 'react';
+import axios from 'axios';
 import {
     Button,
     Form,
@@ -14,11 +15,11 @@ class Register extends React.Component {
     super();
 
     this.state = {
-      name:'',
-      mobile:'',
+      customer :{customerName:'',
+      phone_number:0,
       email: '',
       password: '',
-      empId:''
+      customerId:0},
         
     };
 
@@ -30,16 +31,49 @@ handleChange(e) {
   let value = target.value;
   let name = target.name;
 
-  this.setState({
-    [name]: value
-  });
+  // this.setState({
+  //   [name]: value
+  // });
+  this.setState(prevState =>( {customer:{...prevState.customer,[name]:value}}));
+
 }
 handleSubmit(e) {
   e.preventDefault();
 
-  console.log('The form was submitted with the following data:');
-  console.log(this.state);
+  // console.log('The form was submitted with the following data:');
+  // const customer = {
+   
+  //   customerName:this.state.customerName,
+  //   phone_number:this.state.phone_number,
+  //   email: this.state.email,
+  //   password: this.state.password,
+  //   customerId:this.state.customerId
+  // }
+  console.log(this.state.customer);
+  
+axios.post(`http://localhost:4040/addCustomer`, this.state.customer)
+.then(res => {
+  console.log(res);
+  console.log(res.data);
+})
+// fetch({
+//   method: 'POST',
+//   url: 'http://localhost:4040/addCustomer',
+//   body: customer,
+//   headers: {
+//    'Content-Type': 'application/json',
+//    'Accept': 'application/json'
+//  }
+// })
+//   .then(function(response) {
+//       return response.json()
+//     }).then(function(body) {
+//       console.log(body);
+//     });
 }
+
+
+
 
     render() {
         return (
@@ -47,7 +81,7 @@ handleSubmit(e) {
  <Grid centered columns={2}>
     <Grid.Column>
       <Header as="h1" textAlign="center">
-        Register
+        Registersd
       </Header>
       <Segment>
         <Form size="large" onSubmit={this.handleSubmit}>
@@ -56,17 +90,18 @@ handleSubmit(e) {
             icon="user"
             iconPosition="left"
             placeholder="Name"
-            name="name"
-            value={this.state.name} onChange={this.handleChange}
+            name="customerName"
+            type="text"
+            value={this.state.customerName} onChange={this.handleChange}
           />
           <Form.Input
             fluid
             icon="mobile"
             iconPosition="left"
             placeholder="Phone Number"
-            type="text"
-            name="mobile"
-            value={this.state.mobile} onChange={this.handleChange}
+            name="phone_number"
+            type="number"
+            value={this.state.phone_number} onChange={this.handleChange}
           />
           <Form.Input
             fluid
@@ -74,6 +109,7 @@ handleSubmit(e) {
             iconPosition="left"
             placeholder="Email"
             name="email"
+            type="text"
             value={this.state.email} onChange={this.handleChange}
           />
            <Form.Input
@@ -91,8 +127,8 @@ handleSubmit(e) {
             iconPosition="left"
             placeholder="Employee Id"
             type="text "
-            name="empId"
-            value={this.state.empId} onChange={this.handleChange}
+            name="customerId"
+            value={this.state.customerId} onChange={this.handleChange}
           />
           <Button color="blue" fluid size="large">
             Register
@@ -109,4 +145,3 @@ handleSubmit(e) {
 }
 
 export default Register;
-
