@@ -3,15 +3,15 @@ import { makeStyles } from '@material-ui/core/styles';
 import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
+import {Link} from 'react-router-dom';
 import {
-    Button,
-    Form,
+    Button, 
     Grid,
     Header,
-    Message,
     Segment,
     Icon,
   } from 'semantic-ui-react';
+
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
@@ -24,10 +24,10 @@ const CustomerDashboard = () => {
     const [value, setValue] = React.useState(0);
   
     function handleChange(event, newValue) {
-        <h1>hi</h1>
       setValue(newValue);
+     
     }
-  
+   
     return (
         <div >
             <Grid centered columns={1}>
@@ -39,11 +39,14 @@ const CustomerDashboard = () => {
     </Header.Subheader>
       </Header>
       <Segment>
+      
+      <Link to="/active">   <Button>
       <Icon.Group size='large' right>
       <Icon name='twitter' />
       <Icon corner name='add' />
     </Icon.Group>
    Add Incident
+   </Button></Link>
       </Segment>
       <Segment>
  <Paper className={classes.root}>
@@ -54,8 +57,10 @@ const CustomerDashboard = () => {
         textColor="primary"
         centered
       >
-        <Tab label="Active" />
-        <Tab label="Closed" />
+        <nav>
+     <Link to="/active">  <Tab label="Active"  /></Link>
+     <Link to="/closed">  <Tab label="Closed" /></Link>
+     </nav>
       </Tabs>
     </Paper>
     </Segment>

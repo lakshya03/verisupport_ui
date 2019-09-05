@@ -10,8 +10,8 @@ class App extends Component {
   render() {
     return (
       <div className="App">
-      {/* <Navigation></Navigation> */}
-     <CustomerDashboard></CustomerDashboard>
+      <Navigation></Navigation>
+     {/* <CustomerDashboard></CustomerDashboard> */}
       </div>
     );
   }

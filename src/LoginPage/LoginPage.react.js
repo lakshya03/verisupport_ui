@@ -1,7 +1,7 @@
 import React from 'react';
 import {Link} from 'react-router-dom';
-import Navigation from '../Navigation/Navigation.react'
-import { Redirect } from 'react-router';
+import { connect } from 'react-redux';
+import { login } from '../loginreducer';
 
 import {
     Button,
@@ -11,9 +11,8 @@ import {
     Message,
     Segment,
   } from 'semantic-ui-react';
-  import { connect } from 'react-redux';
-  import { login } from '../loginreducer';
-import Register from '../Register/Register.react';
+  
+
 
 class LoginPage extends React.Component {
     constructor(props) {
@@ -60,7 +59,7 @@ class LoginPage extends React.Component {
             onChange={e => this.setState({password: e.target.value})} value={password}
           />
            <Button color="blue" fluid size="large">
-            Login 
+            Login
           </Button>
         </Form>
       </Segment>
@@ -79,7 +78,7 @@ class LoginPage extends React.Component {
   </Grid>
   <div className="message">
           { isLoginPending && <div>Please wait...</div> }
-          {isLoginSuccess && <div>Success.</div> && <Link to="/register">Success</Link>}
+          { isLoginSuccess && this.props.history.push('/register') }
           { loginError && <div>{loginError.message}</div> }
         </div>
             </div>
@@ -94,8 +93,9 @@ onSubmit(e) {
       email: '',
       password: ''
     });
-    
   }
+
+ 
 }
 
 const mapStateToProps = (state) => {
@@ -105,6 +105,8 @@ const mapStateToProps = (state) => {
     loginError: state.loginError
   };
 }
+
+
 
 const mapDispatchToProps = (dispatch) => {
   return {
