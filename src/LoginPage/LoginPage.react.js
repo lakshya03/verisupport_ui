@@ -2,6 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../loginreducer';
+import axios from 'axios';
 
 import {
     Button,
@@ -11,6 +12,7 @@ import {
     Message,
     Segment,
   } from 'semantic-ui-react';
+import Register from '../Register/Register.react';
   
 
 
@@ -18,22 +20,53 @@ class LoginPage extends React.Component {
     constructor(props) {
         super(props);
         this.state = {
-          showComponent: false,
+         login:{
+          phoneNumber:'',
+            password:''
+         },
+         success:0
         };
         this.onSubmit = this.onSubmit.bind(this);
-        this._onButtonClick = this._onButtonClick.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         
     }
-
-    _onButtonClick() {
-      this.setState({
-        showComponent: true,
-      });
+    handleChange(e) {
+      let target = e.target;
+      let value = target.value;
+      let name = target.name;
+      this.setState(prevState =>( {login:{...prevState.login,[name]:value}}));
+    
     }
-
+    onSubmit(e) {
+      e.preventDefault();
+  
+                  axios.post(`http://localhost:4040/getCustomerByPhoneNumber`,this.state.login)
+                  .then(res => {
+                    console.log(res);
+                    console.log(res.data);
+                    this.setState({success:res.data})
+                    if(this.state.success)
+  { 
+    console.log("shit");
+    // <Register/>
+    // this.props.history('/register');
+    this.props.history.push('/incident');
+   
+   
+  }
+  else{
+    console.log(" Wrong Credentials ");
+  }
+  
+      })
+// }).then(() => {
+//   this.setState({ success: res.data })})
+  console.log(this.state.success);
+  
+  
+   
+  }
     render() {
-        let {email, password} = this.state;
-    let {isLoginPending, isLoginSuccess, loginError} = this.props;
         return (
             <div >
               <Grid centered columns={2}>
@@ -45,18 +78,20 @@ class LoginPage extends React.Component {
         <Form size="large" onSubmit={this.onSubmit}>
           <Form.Input
             fluid
-            icon="user"
+            icon="phone"
             iconPosition="left"
-            placeholder="Email address"
-            onChange={e => this.setState({email: e.target.value})} value={email}
+            placeholder="Phone Number"
+            name="phoneNumber"
+            value={this.state.phoneNumber} onChange={this.handleChange}
           />
           <Form.Input
             fluid
             icon="lock"
             iconPosition="left"
             placeholder="Password"
+            name="password"
             type="password"
-            onChange={e => this.setState({password: e.target.value})} value={password}
+            value={this.state.password} onChange={this.handleChange}
           />
            <Button color="blue" fluid size="large">
             Login
@@ -64,53 +99,22 @@ class LoginPage extends React.Component {
         </Form>
       </Segment>
     <Message> 
-      {/* <Button onClick={this._onButtonClick}>Sign Up</Button>
-        {this.state.showComponent ?
-           <Register /> :
-           null
-        }  */}
+     
         Not registered yet?  <Link to="/register">Sign Up</Link>
         {/* Not registered yet?  <Navigation></Navigation><Redirect to='/register'> Sign Up </Redirect> */}
       </Message>
-
-     
     </Grid.Column>
   </Grid>
-  <div className="message">
+  {/* <div className="message">
           { isLoginPending && <div>Please wait...</div> }
           { isLoginSuccess && this.props.history.push('/incident') }
           { loginError && <div>{loginError.message}</div> }
-        </div>
+        </div> */}
             </div>
         );
     }
 
-onSubmit(e) {
-    e.preventDefault();
-    let { email, password } = this.state;
-    this.props.login(email, password);
-    this.setState({
-      email: '',
-      password: ''
-    });
   }
 
- 
-}
 
-const mapStateToProps = (state) => {
-  return {
-    isLoginPending: state.isLoginPending,
-    isLoginSuccess: state.isLoginSuccess,
-    loginError: state.loginError
-  };
-}
-
-
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    login: (email, password) => dispatch(login(email, password))
-  };
-}
-export default connect(mapStateToProps, mapDispatchToProps)(LoginPage);
+export default LoginPage;

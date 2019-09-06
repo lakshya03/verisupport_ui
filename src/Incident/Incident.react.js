@@ -1,6 +1,6 @@
 import React from 'react';
-import { Form , Grid,Header,Segment,Button} from 'semantic-ui-react'
-
+import { Form , Grid,Header,Segment,Button} from 'semantic-ui-react';
+import Appbar from '../Appbar/Appbar.react';
 const options = [
     { key: 'm', text: 'Mobile Network', value: 'mobile' },
     { key: 'b', text: 'Bill Payment', value: 'bill' },
@@ -15,10 +15,14 @@ const options = [
     render() {
       const { value } = this.state
       return (
+       <div>
+        <div>
+          <Appbar></Appbar>
+        </div>
           <Grid centered columns={2}>
               <Grid.Column>
               <Header as="h2" textAlign="center">
-        Add an Incident
+       <br></br> Add an Incident
       </Header>
       <Segment>
         <Form size="large" >
@@ -43,7 +47,9 @@ const options = [
         </Segment>
         </Grid.Column>
         </Grid>
+        </div>
       )
+      
     }
   }
   

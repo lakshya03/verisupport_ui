@@ -7,12 +7,13 @@ import {Link} from 'react-router-dom';
 import {Switch , Route} from 'react-router-dom';
 import Nav from '../Nav/Nav.react';
 import LoginPage from '../LoginPage/LoginPage.react';
+import {BrowserRouter} from 'react-router-dom';
 import {
     Button,Grid,Header,Segment,Icon,
   } from 'semantic-ui-react';
 import Navigation from '../Navigation/Navigation.react';
 import Incident from '../Incident/Incident.react';
-
+import Appbar from '../Appbar/Appbar.react';
 const useStyles = makeStyles({
   root: {
     flexGrow: 1,
@@ -31,10 +32,13 @@ const CustomerDashboard = () => {
    
     return (
         <div >
+         <div>
+          <Appbar></Appbar>
+       </div>
             <Grid centered columns={1}>
     <Grid.Column>
       <Header as="h2" textAlign="center">
-        Customer Incident Details
+        <br></br>Customer Incident Details
         <Header.Subheader block>
       Manage your account settings and set email preferences
     </Header.Subheader>
@@ -66,7 +70,7 @@ const CustomerDashboard = () => {
           <Link to="/active">  <Tab label="Active"  /></Link>
           <Link to="/closed">  <Tab label="Closed" /></Link>
       </nav> */}
-     <Nav></Nav>
+     <BrowserRouter><Nav /></BrowserRouter>
       </Tabs>
       
     </Paper>
