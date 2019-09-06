@@ -4,13 +4,14 @@ import Paper from '@material-ui/core/Paper';
 import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import {Link} from 'react-router-dom';
+import {Switch , Route} from 'react-router-dom';
+import Nav from '../Nav/Nav.react';
+import LoginPage from '../LoginPage/LoginPage.react';
 import {
-    Button, 
-    Grid,
-    Header,
-    Segment,
-    Icon,
+    Button,Grid,Header,Segment,Icon,
   } from 'semantic-ui-react';
+import Navigation from '../Navigation/Navigation.react';
+import Incident from '../Incident/Incident.react';
 
 const useStyles = makeStyles({
   root: {
@@ -39,14 +40,18 @@ const CustomerDashboard = () => {
     </Header.Subheader>
       </Header>
       <Segment>
-      
-      <Link to="/active">   <Button>
+      <Switch>
+            <Route exact path="/addincident" component={Incident}></Route>
+            </Switch>
+      <Link to="/addincident">   
+      <Button >
       <Icon.Group size='large' right>
       <Icon name='twitter' />
       <Icon corner name='add' />
     </Icon.Group>
    Add Incident
    </Button></Link>
+   <Button circular color='primary' icon='power off'  floated='right'/>
       </Segment>
       <Segment>
  <Paper className={classes.root}>
@@ -57,11 +62,13 @@ const CustomerDashboard = () => {
         textColor="primary"
         centered
       >
-        <nav>
-     <Link to="/active">  <Tab label="Active"  /></Link>
-     <Link to="/closed">  <Tab label="Closed" /></Link>
-     </nav>
+  {/* <nav>
+          <Link to="/active">  <Tab label="Active"  /></Link>
+          <Link to="/closed">  <Tab label="Closed" /></Link>
+      </nav> */}
+     <Nav></Nav>
       </Tabs>
+      
     </Paper>
     </Segment>
     </Grid.Column>

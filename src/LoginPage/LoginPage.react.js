@@ -78,7 +78,7 @@ class LoginPage extends React.Component {
   </Grid>
   <div className="message">
           { isLoginPending && <div>Please wait...</div> }
-          { isLoginSuccess && this.props.history.push('/register') }
+          { isLoginSuccess && this.props.history.push('/incident') }
           { loginError && <div>{loginError.message}</div> }
         </div>
             </div>

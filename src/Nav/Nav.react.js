@@ -5,26 +5,28 @@ import LoginPage from '../LoginPage/LoginPage.react';
 import ActiveIncident from '../ActiveIncident/ActiveIncident.react';
 import ClosedIncident from '../ClosedIncident/ClosedIncident.react';
 import CustomerDashboard from '../CustomerDashboard/CustomerDashboard.react';
+import Tab from '@material-ui/core/Tab';
+import {Link} from 'react-router-dom';
 
-const Navigation = () => {
+const Nav = () => {
+
     return (
-        <div className="Navigation">
-       
+        <div >
+
+<nav>
+     <Link to="/active">  <Tab label="Active"  /></Link>
+     <Link to="/closed">  <Tab label="Closed" /></Link>
+     {/* <Navigation></Navigation> */}
+     </nav>
+
             <Switch>
-            <Route exact path="/" component={LoginPage}></Route>
-                <Route exact path="/register" component={Register}></Route>
-                <Route exact path="/incident" component={CustomerDashboard}></Route>
                 <Route path="/active" component={ActiveIncident}></Route>
                 <Route path="/closed" component={ClosedIncident}></Route>
-                <Route exact path="/login" component={LoginPage}></Route>
             </Switch>
 
-            
-           
-           
         </div>
     );
 
 }
 
-export default Navigation;
+export default Nav;
