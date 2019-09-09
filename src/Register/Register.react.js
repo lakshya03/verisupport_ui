@@ -96,7 +96,7 @@ axios.post(`http://localhost:4040/addCustomer`, this.state.customer)
       const { activeItem } = this.state
         return (
           <div>
-              <div className="ui blue  inverted menu">
+              {/* <div className="ui blue  inverted menu">
               <div className="ui inverted  secondary menu">
               <a className="item"
          
@@ -106,13 +106,14 @@ axios.post(`http://localhost:4040/addCustomer`, this.state.customer)
         <Link to="/">Home</Link>
        </a>
           </div>
-          </div>
+          </div> */}
+           <HomeNav></HomeNav>
             <div >
  <Grid centered columns={2}>
     <Grid.Column>
-      <Header as="h1" textAlign="center">
+      {/* <Header as="h1" textAlign="center">
         Register
-      </Header>
+      </Header> */}<br/>
       <Segment>
         <Form size="large" onSubmit={this.handleSubmit}>
           <Form.Input

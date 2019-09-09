@@ -5,6 +5,7 @@ import { login } from '../loginreducer';
 import {Menu} from 'semantic-ui-react';
 import axios from 'axios';
 import HomeNav from '../HomeNav/HomeNav.react';
+import './LoginPage.css'
 
 import {
     Button,
@@ -72,8 +73,8 @@ class LoginPage extends React.Component {
       const { activeItem } = this.state
 
         return (
-          <div>
-              <div className="ui blue  inverted menu">
+          <div >
+              {/* <div className="ui blue  inverted menu">
               <div className="ui inverted  secondary menu">
               <a className="item"
          
@@ -84,9 +85,11 @@ class LoginPage extends React.Component {
        </a>
           </div>
           </div>
-        
-            <div >
-              <Grid centered columns={2}>
+         */}
+         <HomeNav></HomeNav>
+         
+            <div className="home-land" >
+              <Grid centered columns={2} >
     <Grid.Column>
       <Header as="h2" textAlign="center">
         
