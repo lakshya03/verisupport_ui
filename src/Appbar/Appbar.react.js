@@ -31,16 +31,16 @@ export default class MenuExampleBasic extends React.Component{
           active={activeItem === 'profile'}
           onClick={this.handleItemClick}
         >
-         <Link to="/register">Profile</Link>
+         <Link to="/userprofile">Profile</Link>
         </a>
+        
 
-        {/* <a className="item" 
-         
+        <a className="item" 
           active={activeItem === 'profile'}
           onClick={this.handleItemClick}
         >
          <Link to="/"><Link to="/"></Link>Logout</Link>
-        </a> */}
+        </a> 
          
         
       

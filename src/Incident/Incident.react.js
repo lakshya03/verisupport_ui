@@ -1,6 +1,8 @@
 import React from 'react';
 import { Form , Grid,Header,Segment,Button} from 'semantic-ui-react';
 import Appbar from '../Appbar/Appbar.react';
+import axios from 'axios';
+import uuid from "uuid";
 const options = [
     { key: 'm', text: 'Mobile Network', value: 'mobile' },
     { key: 'b', text: 'Bill Payment', value: 'bill' },
@@ -8,12 +10,48 @@ const options = [
   ]
   
   class Incident extends React.Component {
-    state = {}
+    constructor() {
+      super();
   
-    handleChange = (e, { value }) => this.setState({ value })
+      this.state = {
+      addIncident :{
+        phoneNumber:0,
+        incidentType: 'Mobile Network',
+        priority: 1,
+        comments:'',
+         incidentId:uuid(),
+      status:'Active'}
+          
+      };
+      this.handleSubmit = this.handleSubmit.bind(this);
+      this.handleChange = this.handleChange.bind(this);
+      
+  }
   
+  handleChange(e) {
+    let target = e.target;
+    let value = target.value;
+    let name = target.name;
+  
+    // this.setState({
+    //   [name]: value
+    // });
+    this.setState(prevState =>( {addIncident:{...prevState.addIncident,[name]:value}}));
+  
+  }
+  
+  handleSubmit(e)
+  {
+    e.preventDefault();
+    console.log(this.state.addIncident);
+    axios.post(`http://localhost:5050/addIncident`, this.state.addIncident)
+    .then(res => {
+      console.log(res);
+      console.log(res.data);
+    })
+  }
     render() {
-      const { value } = this.state
+       const { value } = this.state
       return (
        <div>
         <div>
@@ -25,21 +63,41 @@ const options = [
        <br></br> Add an Incident
       </Header>
       <Segment>
-        <Form size="large" >
+        <Form size="large" onSubmit={this.handleSubmit} >
+        <Form.Input
+            fluid
+            icon="phone"
+            iconPosition="left"
+            placeholder="Phone Number"
+            name="phoneNumber"
+            value={this.state.phoneNumber} onChange={this.handleChange}
+          />
           <Form.Group widths="equal">
-            <Form.Input fluid label=' Title' placeholder='Enter the Title'  />
+            <Form.Input fluid label=' Title' placeholder='Enter the Title'   name="title"
+            value={this.state.title} onChange={this.handleChange} />
             
-            <Form.Select
+            {/* <Form.Select
               fluid
               label='Category'
               options={options}
-              placeholder='Category'
               
-            />
+              placeholder='Category'
+              name="incidentType"
+              value={} onChange={this.handleChange}
+              
+            /> */}
+             <Form.Field label='Category' control='select' name='incidentType' onChange={this.handleChange}>
+            
+        <option value='Mobile Network' >Mobile Network</option>
+        <option value='Bill Payment'>Bill Payment</option>
+     
+      </Form.Field>
+            
           </Form.Group>
          
-          <Form.TextArea label='Describe the Incident' placeholder='Kindly give the neccessary details in order to serve you better.' />
-          <Form.Checkbox label='I agree to the Terms and Conditions' />
+          <Form.TextArea label='Describe the Incident' placeholder='Kindly give the neccessary details in order to serve you better.'  name="comments"
+            value={this.state.comments} onChange={this.handleChange}  />
+          
           <Button color="blue" fluid size="large">
             Submit
           </Button>

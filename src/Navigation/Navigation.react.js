@@ -7,6 +7,7 @@ import ClosedIncident from '../ClosedIncident/ClosedIncident.react';
 import CustomerDashboard from '../CustomerDashboard/CustomerDashboard.react';
 import Incident from '../Incident/Incident.react';
 import HomePage from '../HomePage/HomePage.react';
+import UserProfile from '../UserProfile/UserProfile.react';
 
 const Navigation = () => {
     return (
@@ -20,6 +21,7 @@ const Navigation = () => {
                 <Route path="/closed" component={ClosedIncident}></Route>
                 <Route exact path="/login" component={LoginPage}></Route>
                 <Route exact path="/addIncident" component={Incident}></Route>
+                <Route exact path="/userprofile" component={UserProfile}></Route>
 
             </Switch>
 

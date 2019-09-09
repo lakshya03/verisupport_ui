@@ -23,6 +23,7 @@ class Register extends React.Component {
       email: '',
       password: '',
       customerId:0},
+      success:0
         
     };
 
@@ -58,6 +59,19 @@ axios.post(`http://localhost:4040/addCustomer`, this.state.customer)
 .then(res => {
   console.log(res);
   console.log(res.data);
+  this.setState({success:res.data})
+  if(this.state.success)
+  { 
+    console.log("shit");
+    // <Register/>
+    // this.props.history('/register');
+    this.props.history.push('/login');
+   
+   
+  }
+  else{
+    console.log(" Enter the values ");
+  }
 })
 // fetch({
 //   method: 'POST',
