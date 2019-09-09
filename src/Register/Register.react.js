@@ -1,5 +1,8 @@
 import React from 'react';
 import axios from 'axios';
+import {Menu} from 'semantic-ui-react';
+import {Link} from 'react-router-dom';
+
 import {
     Button,
     Form,
@@ -7,7 +10,7 @@ import {
     Header,
     Segment,
   } from 'semantic-ui-react';
-
+  import HomeNav from '../HomeNav/HomeNav.react';
 
 class Register extends React.Component {
  
@@ -76,12 +79,25 @@ axios.post(`http://localhost:4040/addCustomer`, this.state.customer)
 
 
     render() {
+      const { activeItem } = this.state
         return (
+          <div>
+              <div className="ui blue  inverted menu">
+              <div className="ui inverted  secondary menu">
+              <a className="item"
+         
+         active={activeItem === 'home'}
+         onClick={this.handleItemClick}
+       >
+        <Link to="/">Home</Link>
+       </a>
+          </div>
+          </div>
             <div >
  <Grid centered columns={2}>
     <Grid.Column>
       <Header as="h1" textAlign="center">
-        Registersd
+        Register
       </Header>
       <Segment>
         <Form size="large" onSubmit={this.handleSubmit}>
@@ -140,6 +156,8 @@ axios.post(`http://localhost:4040/addCustomer`, this.state.customer)
   </Grid>
 
             </div>
+            </div>
+            
         );
     } 
 }

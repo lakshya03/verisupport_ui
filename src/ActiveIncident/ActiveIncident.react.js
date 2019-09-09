@@ -6,7 +6,7 @@ const ActiveIncident = () => {
 
     return (
         <div >
-<h1>active</h1>
+<h1>activcghhhhhhhhhhhhhh</h1>
         </div>
     );
 

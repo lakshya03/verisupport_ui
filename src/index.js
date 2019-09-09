@@ -9,6 +9,9 @@ import { Route, Link} from 'react-router-dom';
 import {BrowserRouter} from 'react-router-dom';
 import Register from './Register/Register.react';
 import LoginPage from './LoginPage/LoginPage.react';
+import 'react-mdl/extra/material.css';
+import 'react-mdl/extra/material.js';
+import '../node_modules/font-awesome/css/font-awesome.min.css';
 
 ReactDOM.render(
   <Provider store={store}><BrowserRouter><App /></BrowserRouter></Provider>

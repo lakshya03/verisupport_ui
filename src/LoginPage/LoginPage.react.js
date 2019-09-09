@@ -2,7 +2,9 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { connect } from 'react-redux';
 import { login } from '../loginreducer';
+import {Menu} from 'semantic-ui-react';
 import axios from 'axios';
+import HomeNav from '../HomeNav/HomeNav.react';
 
 import {
     Button,
@@ -67,12 +69,27 @@ class LoginPage extends React.Component {
    
   }
     render() {
+      const { activeItem } = this.state
+
         return (
+          <div>
+              <div className="ui blue  inverted menu">
+              <div className="ui inverted  secondary menu">
+              <a className="item"
+         
+         active={activeItem === 'home'}
+         onClick={this.handleItemClick}
+       >
+        <Link to="/">Home</Link>
+       </a>
+          </div>
+          </div>
+        
             <div >
               <Grid centered columns={2}>
     <Grid.Column>
       <Header as="h2" textAlign="center">
-        Login
+        
       </Header>
       <Segment>
         <Form size="large" onSubmit={this.onSubmit}>
@@ -111,6 +128,8 @@ class LoginPage extends React.Component {
           { loginError && <div>{loginError.message}</div> }
         </div> */}
             </div>
+            </div>
+           
         );
     }
 

@@ -43,20 +43,7 @@ const CustomerDashboard = () => {
       Manage your account settings and set email preferences
     </Header.Subheader>
       </Header>
-      <Segment>
-      <Switch>
-            <Route exact path="/addincident" component={Incident}></Route>
-            </Switch>
-      <Link to="/addincident">   
-      <Button >
-      <Icon.Group size='large' right>
-      <Icon name='twitter' />
-      <Icon corner name='add' />
-    </Icon.Group>
-   Add Incident
-   </Button></Link>
-   <Button circular color='primary' icon='power off'  floated='right'/>
-      </Segment>
+     
       <Segment>
  <Paper className={classes.root}>
       <Tabs
