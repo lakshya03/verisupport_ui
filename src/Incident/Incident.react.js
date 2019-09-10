@@ -36,7 +36,7 @@ class Incident extends React.Component {
     e.preventDefault();
     console.log(this.state.addIncident);
     axios
-      .post(`http://localhost:5050/addIncident`, this.state.addIncident)
+      .post(`http://localhost:2020/incident-management-service/addIncident`, this.state.addIncident)
       .then(res => {
         console.log(res);
         console.log(res.data);
@@ -45,9 +45,7 @@ class Incident extends React.Component {
   render() {
     return (
       <div>
-        <div>
-          <Appbar></Appbar>
-        </div>
+       
         <Grid centered columns={2}>
           <Grid.Column>
             <Header as="h2" textAlign="center">

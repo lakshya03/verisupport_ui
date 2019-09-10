@@ -30,6 +30,11 @@ const HomePage = () => {
                   <h5>Signup</h5>
                 </i>
               </a>
+              <a href="/agentlogin" rel="noopener noreferrer" >
+              <i class="fa fa-user-circle-o" aria-hidden="true">
+                  <h5>Agent Login</h5>
+                </i>
+              </a>
             </div>
           </div>
         </Cell>

@@ -2,14 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import HomeNav from "../HomeNav/HomeNav.react";
-import {
-  Button,
-  Form,
-  Grid,
-  Header,
-  Message,
-  Segment
-} from "semantic-ui-react";
+import {Button,Form,Grid,Header,Message,Segment} from "semantic-ui-react";
+
 
 class LoginPage extends React.Component {
   constructor(props) {
@@ -19,12 +13,14 @@ class LoginPage extends React.Component {
         phoneNumber: "",
         password: ""
       },
+   
       
       success: 0
     };
     this.onSubmit = this.onSubmit.bind(this);
     this.handleChange = this.handleChange.bind(this);
   }
+  
   handleChange(e) {
     let target = e.target;
     let value = target.value;
@@ -40,19 +36,18 @@ class LoginPage extends React.Component {
       localStorage.setItem('phoneNumber', this.state.login.phoneNumber)
 
     axios
-      .post(`http://localhost:4040/getCustomerByPhoneNumber`, this.state.login)
+      .post(`http://localhost:2020/customer-application-service/getCustomerByPhoneNumber`, this.state.login)
       .then(res => {
-        // console.log(res);
-        // console.log(res.data);
         this.setState({ success: res.data });
         if (this.state.success) {
           this.props.history.push("/dashboard");
         } else {
+           this.setState({message:"Invalid Login"});
+  
           console.log(" Wrong Credentials ");
         }
       });
     
-    console.log(this.state.success);
   }
   render() {
 
@@ -93,9 +88,11 @@ class LoginPage extends React.Component {
                 Not registered yet? <Link to="/register">Sign Up</Link>
               </Message>
             </Grid.Column>
+            
           </Grid>
-        
+          
         </div>
+       
       </div>
     );
   }
