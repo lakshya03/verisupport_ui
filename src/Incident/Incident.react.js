@@ -13,7 +13,7 @@ class Incident extends React.Component {
       addIncident: {
         phoneNumber: 0,
         incidentType: "Mobile Network",
-        priority: 1,
+        priority: '1',
         comments: "",
         incidentId: uuid(),
         status: "Active"

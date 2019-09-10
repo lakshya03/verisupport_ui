@@ -20,13 +20,13 @@ const HomePage = () => {
               them.
             </p>
             <div className="social-links">
-              <a href="/login" rel="noopener noreferrer" target="_blank">
-                <i class="fa fa-sign-in" aria-hidden="true">
+              <a href="/login" rel="noopener noreferrer" >
+                <i className="fa fa-sign-in" aria-hidden="true">
                   <h5>Login</h5>
                 </i>
               </a>
-              <a href="/register" rel="noopener noreferrer" target="_blank">
-                <i class="fa fa-user-plus" aria-hidden="true">
+              <a href="/register" rel="noopener noreferrer" >
+                <i className="fa fa-user-plus" aria-hidden="true">
                   <h5>Signup</h5>
                 </i>
               </a>

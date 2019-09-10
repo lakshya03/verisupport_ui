@@ -21,6 +21,7 @@ const CustomerDashboard = () => {
       setValue(newValue);
      
     }
+    if(localStorage.getItem('phoneNumber')){
    
     return (
         <div >
@@ -30,9 +31,9 @@ const CustomerDashboard = () => {
             <Grid centered columns={1}>
                 <Grid.Column>
                     <Header as="h2" textAlign="center">
-                         <br></br>Customer Incident Details
+                         <br></br>Welcome to VeriSupport
                       <Header.Subheader block>
-                          Manage your account settings and set email preferences
+                      The Best Customer Experience are built with VeriSupport
                       </Header.Subheader>
                     </Header> 
                 <Segment>
@@ -53,6 +54,12 @@ const CustomerDashboard = () => {
           </Grid>
         </div>
     );
+    }
+    else {
+      return(
+      <h1>error</h1>
+      );
+    }
 
 }
 

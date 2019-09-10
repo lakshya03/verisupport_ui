@@ -19,6 +19,7 @@ class LoginPage extends React.Component {
         phoneNumber: "",
         password: ""
       },
+      
       success: 0
     };
     this.onSubmit = this.onSubmit.bind(this);
@@ -34,6 +35,9 @@ class LoginPage extends React.Component {
   }
   onSubmit(e) {
     e.preventDefault();
+
+    
+      localStorage.setItem('phoneNumber', this.state.login.phoneNumber)
 
     axios
       .post(`http://localhost:4040/getCustomerByPhoneNumber`, this.state.login)
