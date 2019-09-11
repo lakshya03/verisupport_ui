@@ -5,7 +5,6 @@ import { Switch, Route } from "react-router-dom";
 import Register from "../Register/Register.react";
 import LoginPage from "../LoginPage/LoginPage.react";
 import CustomerDashboard from "../CustomerDashboard/CustomerDashboard.react";
-import Incident from "../Incident/Incident.react";
 import HomePage from "../HomePage/HomePage.react";
 import UserProfile from "../UserProfile/UserProfile.react";
 import AgentLogin from "../AgentLogin/AgentLogin.react";

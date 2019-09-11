@@ -27,7 +27,7 @@ class ClosedIncident extends React.Component {
       <Table striped bordered hover>
         <thead>
           <tr>
-
+            <th>Title</th>
             <th>Incident Type</th>
             <th>Priority</th>
             <th>Description</th>
@@ -40,7 +40,7 @@ class ClosedIncident extends React.Component {
           {
             this.state.closedIncidentList.map((name, index) => {
               return <tr key={index}>
-                {/* <td>{props.activeIncidentList[index].incidentId}</td> */}
+                <td>{this.state.closedIncidentList[index].title}</td>
                 <td>{this.state.closedIncidentList[index].incidentType}</td>
                 <td>{this.state.closedIncidentList[index].priority}</td>
                 <td>{this.state.closedIncidentList[index].comments}</td>

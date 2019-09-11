@@ -2,7 +2,6 @@
 
 import React from "react";
 import { Form, Grid, Header, Segment, Button } from "semantic-ui-react";
-import Appbar from "../Appbar/Appbar.react";
 import axios from "axios";
 import uuid from "uuid";
 class Incident extends React.Component {
@@ -13,10 +12,11 @@ class Incident extends React.Component {
       addIncident: {
         phoneNumber: 0,
         incidentType: "Mobile Network",
-        priority: '1',
+        priority: 'high',
         comments: "",
         incidentId: uuid(),
-        status: "Active"
+        status: "Active",
+        title: ""
       }
     };
     this.handleSubmit=this.handleSubmit.bind(this);
@@ -36,7 +36,7 @@ class Incident extends React.Component {
     e.preventDefault();
     console.log(this.state.addIncident);
     axios
-      .post(`http://localhost:2020/incident-management-service/addIncident`, this.state.addIncident)
+      .post(`http://localhost:5050/addIncident`, this.state.addIncident)
       .then(res => {
         console.log(res);
         console.log(res.data);
@@ -65,7 +65,7 @@ class Incident extends React.Component {
                 <Form.Group widths="equal">
                   <Form.Input
                     fluid
-                    label=" Title"
+                    label="Title"
                     placeholder="Enter the Title"
                     name="title"
                     value={this.state.title}

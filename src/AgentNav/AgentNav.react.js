@@ -5,9 +5,7 @@ import { Icon } from 'semantic-ui-react';
 import './AgentNav.css';
 
 class AgentNav extends React.Component {
-    constructor(props) {
-        super(props);
-    }
+    
     logout(){
 
        

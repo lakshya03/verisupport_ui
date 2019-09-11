@@ -34,7 +34,7 @@ cancelIncident(incidentId){
       <Table striped bordered hover>
         <thead>
           <tr>
-
+            <th>Title</th>
             <th>Incident Type</th>
             <th>Priority</th>
             <th>Description</th>
@@ -47,7 +47,7 @@ cancelIncident(incidentId){
           {
             this.state.activeIncidentList.map((name, index) => {
               return <tr key={index}>
-                {/* <td>{props.activeIncidentList[index].incidentId}</td> */}
+                <td>{this.state.activeIncidentList[index].title}</td>
                 <td>{this.state.activeIncidentList[index].incidentType}</td>
                 <td>{this.state.activeIncidentList[index].priority}</td>
                 <td>{this.state.activeIncidentList[index].comments}</td>

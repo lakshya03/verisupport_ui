@@ -1,8 +1,7 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import axios from "axios";
 import HomeNav from "../HomeNav/HomeNav.react";
-import {Button,Form,Grid,Header,Message,Segment} from "semantic-ui-react";
+import {Button,Form,Grid,Header,Segment} from "semantic-ui-react";
 import './AgentLogin.css';
 
 class AgentLogin extends React.Component {

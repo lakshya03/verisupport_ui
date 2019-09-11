@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Item, Segment, Search, Container, Grid, Select, Label, Form } from 'semantic-ui-react';
+import {  Item, Segment,Form } from 'semantic-ui-react';
 import './SearchResults.css';
 import axios from 'axios';
 import IncidentHolder from '../IncidentHolder/IncidentHolder.react';
@@ -13,12 +13,13 @@ class SearchResults extends React.Component {
             phoneNumber:0,        //Initialising state
             searchTerm : "",
             results: [],        //container to hold the results
-            loaded: false,      //To determine if the page has loaded or not and will be changed in componentDidMount() method
-            hasResults: false   //To determine if the search return any results and if not used to display appropriate message to the user
+            loaded:false,      //To determine if the page has loaded or not and will be changed in componentDidMount() method
+            hasResults:false,   //To determine if the search return any results and if not used to display appropriate message to the user
+            respMsg: ""
         };
         this.onSubmit = this.onSubmit.bind(this);
         this.handleChange = this.handleChange.bind(this);
-       
+        //this.closeIncident = this.closeIncident.bind(this);
     }
 
    
@@ -29,34 +30,46 @@ class SearchResults extends React.Component {
         let name = target.name;
         this.setState({ [name]: value });
       }
-
-      
-
-    onSubmit(e){ //Gets the search results if the search button is clicked
-        e.preventDefault();
+      fetchGetIncident=()=>{
         axios.get(`http://localhost:5050/getIncidents/${this.state.phoneNumber}`)//url for getting incidents
         .then(res => {
           this.setState({ results:res, loaded:true, });
         });
+    }
+      
 
-        console.log(this.state.results);
-        console.log(this.state.searchCriteria);
+    onSubmit(e){ //Gets the search results if the search button is clicked
+        e.preventDefault();
+        this.fetchGetIncident();
     }
 
    
-    // closeIncident(incidentId){
-    //     axios.delete(`http://localhost:5050/removeIncident/${incidentId}`).then(res=>res.data);
-    
-    // }
-    handleCloseIncident(incId){
+   
+    closeIncident = incidentId => {
+        axios.put(`http://localhost:5050/closeIncident/${incidentId}`).then(
+            res=>{
+              this.setState({respMsg:res.data})
+              if(res.data==="This incident is closed"){
+               this.fetchGetIncident();
+                console.log("handleDelete called")
+                }
+                else {
+                    alert("The incident was not Closed \n" + res.data);
+                    
+                }
+            }
+            );
+            console.log(this.state.respMsg)
+    }
+    handleCloseIncident = incId =>{
         confirmAlert({
 
-            title: "Confirm to remove Agent",
-            message: "Are you sure you want to delete this agent",
+            title: "Confirm to close Incident",
+            message: "Are you sure you want to clsoe this incident",
             buttons: [
                 {
                     label: "Yes, Close Incident",
-                    onClick: () => alert("incident close"+incId)//axios call to close Incident
+                    onClick: () => this.closeIncident(incId)//axios call to close Incident
                                                                 //set active to closed in the incident state
                 },
                 {
@@ -67,7 +80,30 @@ class SearchResults extends React.Component {
         
     }
 
-    
+    setpriority=(incId,priority)=>{
+        axios.put(`http://localhost:5050/changePriority/${incId}/${priority}`).then(res=>res.data);
+        console.log(incId + " " + priority);
+        this.fetchGetIncident();
+
+    }
+    handleChangePriority = (incId,priority) => {
+        confirmAlert({
+
+            title: "Confirm to Change Priority ?",
+            message: "Are you sure you want to change the priority",
+            buttons: [
+                {
+                    label: "Yes, Change It",
+                    onClick: () => this.setpriority(incId,priority)//axios call to close Incident
+                                                                //set active to closed in the incident state
+                },
+                {
+                    label: "No, Go Back"
+                }
+            ]
+        })
+    }
+
 
     render() {
         return (
@@ -86,7 +122,7 @@ class SearchResults extends React.Component {
                 </Form>
                 <Item.Group divided>        {/* Iterator to which displays the incident using the results element from the state */}
                 {this.state.loaded? this.state.results.data.map((eachIncident, index)=>{
-            return(<IncidentHolder from="agentsearch" key={index} details={eachIncident} onClose={this.handleCloseIncident} />)
+            return(<IncidentHolder from="agentsearch" key={index} details={eachIncident} onClose={this.handleCloseIncident} changePriority={this.handleChangePriority}/>)
             }): <div>No results to display</div>}                 
                 </Item.Group>
 
